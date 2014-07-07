@@ -14,6 +14,7 @@ const char * AT= "AT+";
 const char * AT_READ_DIGITAL="READ_DIGITAL";
 const char * AT_SET_OUTPUT = "SET_OUTPUT";
 const char * AT_DEFINE_GPIO = "DEFINE_GPIO";
+const char * AT_ACK = "ACK";
 const char * AT_GET_ADC="GET_ADC";
 const char * AT_PORT_1 =",PORT1";
 const char * AT_PORT_2 =",PORT2";
@@ -69,6 +70,13 @@ char * Get_AT_Command(char * Input_String,AT_COMMANDS *AT_COMMAND)
 	{
 		*AT_COMMAND = DEFINE_GPIO;
 		returnVal+=strlen(AT_DEFINE_GPIO);
+		return returnVal;
+	}
+	returnVal = strstr((const char *)Input_String,AT_ACK);
+	if(returnVal)
+	{
+		*AT_COMMAND = ACK;
+		returnVal+=strlen(AT_ACK);
 		return returnVal;
 	}
 	return returnVal;

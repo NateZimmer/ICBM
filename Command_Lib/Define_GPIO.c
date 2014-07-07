@@ -15,9 +15,6 @@
 // GPIO_PULL_TYPES = GPIO_NO_PULL = 0,	GPIO_PULL_UP = 1,	GPIO_PULL_DOWN = 2
 
 
-
-
-
 bool Define_GPIO_Value(char * Input_Text)
 {
 	bool returnVal = false;

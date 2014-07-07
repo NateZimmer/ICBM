@@ -22,12 +22,11 @@ static adcData ADC10_External;
 
 void initADC(unsigned int inputBits) {
 	ADC10CTL1 = INCH_7 + CONSEQ_1; // Start sequence at channel 7, then decrement to A0
-	ADC10AE0 |= inputBits; // Use channels P1.0,3,4,5,6,7
+	ADC10AE0 = inputBits; // Use channels P1.0,3,4,5,6,7
 	ADC10CTL0 = ADC10SHT_2 + MSC + ADC10ON + ADC10IE; //See definitions
 	ADC10DTC1 = 0x08; // 8 conversions
 	ADC10CTL0 &= ~ENC;
-	while (ADC10CTL1 & BUSY)
-		; // Wait if ADC10 core is active
+	while (ADC10CTL1 & BUSY); // Wait if ADC10 core is active
 	ADC10SA = (unsigned int) ADC10.dataArray; // Data buffer start
 	ADC10CTL0 |= ENC + ADC10SC; // Sampling and conversion start
 	_enable_interrupts();

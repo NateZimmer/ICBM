@@ -14,6 +14,23 @@
 #include "Command_Lib/Define_GPIO.h"
 #include "Command_Lib/Get_ADC.h"
 
+
+char Command_Buffer[40];
+
+static uint16_t Command_Buffer_Index = 0;
+
+void Add_Char_To_Command_Buffer(char Input_Char)
+{
+	Command_Buffer[Command_Buffer_Index] = Input_Char;
+	Command_Buffer_Index = (Command_Buffer_Index + 1) % (sizeof(Command_Buffer)-1);
+}
+
+void Clear_Command_Buffer()
+{
+	Command_Buffer_Index = 0;
+	memset(Command_Buffer,0,sizeof(Command_Buffer));
+}
+
 void Run_Command(char * Input_Text)
 {
  	bool returnVal = false;
@@ -71,3 +88,32 @@ void Run_Command(char * Input_Text)
 		writeUartString((char *)AT_INVALID);
 	}
 }
+
+#pragma vector=USCIAB0RX_VECTOR
+__interrupt void USCI0RX_ISR(void) {
+	char Input_Char = 0;
+	if((IFG2 & UCA0RXIFG))
+	{
+		Input_Char =UCA0RXBUF;
+		if(Input_Char == '\r')
+		{
+			Run_Command(Command_Buffer);
+			Clear_Command_Buffer();
+		}
+		else
+		{
+			while (!(IFG2 & UCA0TXIFG));
+			UCA0TXBUF = Input_Char;
+			//while (UCA0STAT & UCBUSY);
+			Add_Char_To_Command_Buffer(Input_Char);
+		}
+	}
+
+	if((IFG2 & UCB0RXIFG))
+	{
+		_delay_cycles(1);
+	}
+}
+
+
+

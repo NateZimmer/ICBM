@@ -104,10 +104,11 @@ void Define_GPIO(GPIO_PORTS GPIO_PORT, GPIO_OUTPUT_TYPES GPIO_OUTPUT_TYPE, GPIO_
 		if(GPIO_OUTPUT_TYPE == GPIO_OUTPUT)
 		{
 			P1DIR |= GPIO_Input_Pin;
+			P1REN &=~GPIO_Input_Pin;
 		}
 		else
 		{
-			P1DIR &=(~GPIO_Input_Pin)||(BIT1+BIT2);
+			P1DIR &=(~GPIO_Input_Pin)|(BIT1+BIT2);
 			switch(GPIO_PULL_TYPE)
 			{
 			case GPIO_NO_PULL:

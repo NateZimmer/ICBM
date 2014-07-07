@@ -22,7 +22,8 @@ typedef enum
 	DEFINE_GPIO= 1,
 	SET_GPIO_OUTPUT=2,
 	READ_DIGITAL_INPUTS=3,
-	READ_ADC=4
+	READ_ADC=4,
+	ACK=5
 }AT_COMMANDS;
 
 #define DEBUG()	_delay_cycles(1)

@@ -10,11 +10,7 @@
 bool Get_Adc_Values()
 {
 	adcChannels adcData = getAdcData();
-	sprintf(outputTextBuffer,"%d,",adcData.A0);
-	writeUartString(outputTextBuffer);
-	sprintf(outputTextBuffer,"%d,",adcData.A1);
-	writeUartString(outputTextBuffer);
-	sprintf(outputTextBuffer,"%d,",adcData.A2);
+	sprintf(outputTextBuffer,"\r\n%d,",adcData.A0); // A1 and A2 are comm lines, hence they are skipped
 	writeUartString(outputTextBuffer);
 	sprintf(outputTextBuffer,"%d,",adcData.A3);
 	writeUartString(outputTextBuffer);

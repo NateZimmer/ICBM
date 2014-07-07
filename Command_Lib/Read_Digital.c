@@ -9,16 +9,9 @@
 
 bool Read_Digital(char * Input_Text)
 {
-	bool returnVal = false;
- 	GPIO_PORTS AT_PORT = GPIO_NO_PORT;
-	uint16_t Port_Input_Data = 0;
-//	extern char * outputTextBuffer;
-	if(AT_Get_Port(Input_Text, &AT_PORT))
-	{
-		Port_Input_Data = Read_Digital_Port(AT_PORT);
-		sprintf(outputTextBuffer,"\r\n%d\r\n",Port_Input_Data);
-		writeUartString(outputTextBuffer);
-		returnVal = true;
-	}
-	return returnVal;
+	uint16_t Port_1_Data = Read_Digital_Port(GPIO_PORT1);
+	uint16_t Port_2_Data = Read_Digital_Port(GPIO_PORT2);
+	sprintf(outputTextBuffer,"\r\n%d,%d\r\n",Port_1_Data,Port_2_Data);
+	writeUartString(outputTextBuffer);
+	return true;
 }
