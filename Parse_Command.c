@@ -19,6 +19,7 @@ const char * AT_GET_ADC="GET_ADC";
 const char * AT_PORT_1 =",PORT1";
 const char * AT_PORT_2 =",PORT2";
 const char * AT_PORT_3 =",PORT3";
+const char * AT_PWM ="PWM";
 const char * AT_INVALID = "\r\nInvalid Message\r\n";
 
 //Checks for the string "AT+" and returns the pointer to the location past this if it is included in the string
@@ -79,6 +80,14 @@ char * Get_AT_Command(char * Input_String,AT_COMMANDS *AT_COMMAND)
 		returnVal+=strlen(AT_ACK);
 		return returnVal;
 	}
+	returnVal = strstr((const char *)Input_String,AT_PWM);
+	if(returnVal)
+	{
+		*AT_COMMAND = SET_PWM;
+		returnVal+=strlen(AT_PWM);
+		return returnVal;
+	}
+
 	return returnVal;
 }
 

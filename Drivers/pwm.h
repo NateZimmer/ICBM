@@ -49,24 +49,27 @@ typedef enum
 //#define ID_1                   (1*0x40u)      /* Timer A input divider: 1 - /2 */
 //#define ID_2                   (2*0x40u)      /* Timer A input divider: 2 - /4 */
 //#define ID_3                   (3*0x40u)      /* Timer A input divider: 3 - /8 */
-	ONE_DIVIDER,
-	TWO_DIVIDER,
-	FOUR_DIVIDER,
-	EIGHT_DIVIDER
+	ONE_DIVIDER = 0,
+	TWO_DIVIDER = 1,
+	FOUR_DIVIDER = 2,
+	EIGHT_DIVIDER = 3
 }PWM_DIVIDER;
 
 typedef enum
 {
-	P1x2_TA0x1,
-	P1x6_TA0x1,
-	P2x1_TA1x1,
-	P2x2_TA1x1,
-	P2x4_TA1x2,
-	P2x5_TA1x2
+	P1x2_TA0x1 = 0,
+	P1x6_TA0x1 = 1,
+	P2x1_TA1x1 = 2,
+	P2x2_TA1x1 = 3,
+	P2x4_TA1x2 = 4,
+	P2x5_TA1x2 = 5
 }PWM_PINS;
 
 void timerSetup(TIMER_SELECT TIMER, uint16_t timerValue,PWM_CLK_SELECT PWM_CLK,PWM_COUNT_MODE PWM_MODE, PWM_DIVIDER PWM_DIVIDE, bool ISR_ENABLED );
 void channelPwmSetup(PWM_PINS PWM_PIN,uint16_t timerValue);
 
+
+//AT+PWM,[PIN],[Freq/CCR0],[Duty],[Divider]
+//AT+PWM,1,60000,60000,1
 
 #endif /* PWM_H_ */

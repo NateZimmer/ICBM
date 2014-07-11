@@ -50,6 +50,8 @@ void Set_Digital_Output(GPIO_PORTS GPIO_PORT,uint16_t GPIO_PIN, bool Output_High
 		{
 			P1OUT &= (~GPIO_PIN)|(BIT1+BIT2);
 		}
+		P1SEL &= (~GPIO_PIN)|(BIT1+BIT2);
+		P1SEL2 &= (~GPIO_PIN)|(BIT1+BIT2);
 		break;
 	case GPIO_PORT2:
 		if(Output_High)
@@ -60,6 +62,8 @@ void Set_Digital_Output(GPIO_PORTS GPIO_PORT,uint16_t GPIO_PIN, bool Output_High
 		{
 			P2OUT &= ~(GPIO_PIN);
 		}
+		P2SEL &= (~GPIO_PIN);
+		P2SEL2 &= (~GPIO_PIN);
 		break;
 	case GPIO_PORT3:
 		if(Output_High)
@@ -70,6 +74,8 @@ void Set_Digital_Output(GPIO_PORTS GPIO_PORT,uint16_t GPIO_PIN, bool Output_High
 		{
 			P3OUT &= ~(GPIO_PIN);
 		}
+		P3SEL &= (~GPIO_PIN);
+		P3SEL2 &= (~GPIO_PIN);
 		break;
 	default:
 		break;

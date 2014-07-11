@@ -13,6 +13,7 @@
 #include "Command_Lib/Set_GPIO_Output.h"
 #include "Command_Lib/Define_GPIO.h"
 #include "Command_Lib/Get_ADC.h"
+#include "Command_Lib/Set_PWM.h"
 
 
 char Command_Buffer[40];
@@ -72,6 +73,12 @@ void Run_Command(char * Input_Text)
  				break;
  			case READ_ADC:
  				if(Get_Adc_Values())
+ 				{
+ 					returnVal = true;
+ 				}
+ 				break;
+ 			case SET_PWM:
+ 				if(Set_PWM_Output(Input_Text))
  				{
  					returnVal = true;
  				}
