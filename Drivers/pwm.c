@@ -43,19 +43,19 @@ void channelPwmSetup(PWM_PINS PWM_PIN,uint16_t timerValue)
 		break;
 	}
 
-	if(PWM_PIN | (P1x2_TA0x1|P1x6_TA0x1))
+	if(PWM_PIN & (P1x2_TA0x1|P1x6_TA0x1))
 	{
 		TA0CCR1 = timerValue;
 		TA0CCTL1 = OUTMOD_7; // CCR1 reset/set
 	}
 
-	if(PWM_PIN | (	P2x1_TA1x1|P2x2_TA1x1))
+	if(PWM_PIN & (	P2x1_TA1x1|P2x2_TA1x1))
 	{
 		TA1CCR1 = timerValue;
 		TA1CCTL1 = OUTMOD_7; // CCR1 reset/set
 	}
 
-	if(PWM_PIN|(P2x4_TA1x2|P2x5_TA1x2))
+	if(PWM_PIN & (P2x4_TA1x2|P2x5_TA1x2))
 	{
 		TA1CCR2 = timerValue;
 		TA1CCTL2 = OUTMOD_7; // CCR1 reset/set
@@ -145,7 +145,7 @@ void timerSetup(TIMER_SELECT TIMER, uint16_t timerValue,PWM_CLK_SELECT PWM_CLK,P
 
 	case TIMER1:
 		TA1CTL =TACTL_Value;
-		TA1CCR1 = timerValue;
+		TA1CCR0 = timerValue;
 		if(ISR_ENABLED)
 		{
 			TA1CCTL0 |= CCIE;
