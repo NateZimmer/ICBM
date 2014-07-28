@@ -5,8 +5,23 @@
  *      Author: Nate
  */
 
-#include "adc.h"
+/*
+  	This file is part of MSP430 DAC.
+    MSP430 DAC is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
+    MSP430 DAC is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MSP430 DAC.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "adc.h"
 #include "pwm.h"
 
 void channelPwmSetup(PWM_PINS PWM_PIN,uint16_t timerValue)
@@ -153,7 +168,6 @@ void timerSetup(TIMER_SELECT TIMER, uint16_t timerValue,PWM_CLK_SELECT PWM_CLK,P
 		break;
 	}
 }
-
 
 /*
 #pragma vector=TIMER0_A1_VECTOR

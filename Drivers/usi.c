@@ -5,6 +5,22 @@
  *      Author: Nate
  */
 
+/*
+  	This file is part of MSP430 DAC.
+    MSP430 DAC is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    MSP430 DAC is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with MSP430 DAC.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "msp430g2553.h"
 #include "usi.h"
 #include "stdbool.h"
@@ -33,9 +49,6 @@ void initUart(SERIAL_CLASSES * uartClass)
     	UCA0BR1 = (0x682>>8);
     	UCA0BR0 = (0x682 & 0xFF);
     	UCA0MCTL = UCBRS_6;
-    	//UCA0BR0 = 104; // Baud: 9600, N= CLK/Baud, N= 10^6 / 9600
-    	//UCA0BR1 = 0; // Set upper half of baud select to 0
-        //UCA0MCTL = UCBRS_1; // Modulation UCBRSx = 1
     	break;
     case BAUD_115200:
     	UCA0BR1 = (0x8A>>8);
@@ -63,7 +76,7 @@ void initSpiBFull(uint16_t baudRate, SPI_PHASE_POLARITYS SPI_Phase_Polarity)
 	UCB0CTL1 |= UCSSEL_2; // SMCLK
 	UCB0BR1 = ((baudRate)&0xFF00)>>8;
 	UCB0BR0 = (baudRate)&0xFF;
-	UCB0CTL1 &= ~UCSWRST; // **Initialize USCI state machine**
+	UCB0CTL1 &= ~UCSWRST;
 }
 
 void initSPI(SERIAL_CLASSES * spiClass)
@@ -78,8 +91,8 @@ void initSPI(SERIAL_CLASSES * spiClass)
 		break;
 	}
 
-	UCB0CTL0 |=  UCCKPH +  UCMSB + UCMST + UCSYNC; // 3-pin, 8-bit SPI master
-	UCB0CTL1 |= UCSSEL_2; // SMCLK
+	UCB0CTL0 |=  UCCKPH +  UCMSB + UCMST + UCSYNC;
+	UCB0CTL1 |= UCSSEL_2;
 
 	switch(spiClass->baudRate)
 	{
@@ -112,7 +125,6 @@ void initUSI(SERIAL_CLASSES * serialClass)
 	}
 }
 
-
 uint8_t writeReadByte(uint8_t data)
 {
 	uint8_t recv=0;
@@ -123,7 +135,6 @@ uint8_t writeReadByte(uint8_t data)
 	return recv;
 
 }
-
 
 void writeStringTXD(char * data , SERIAL_CLASSES * serialClass)
 {
@@ -157,9 +168,6 @@ void writeUartString(char * data)
 		i++;
 	}
 }
-
-
-
 
 uint8_t readUsiBuffer(SERIAL_CLASSES * serialClass, uint8_t * pBuf, uint8_t len)
 {
