@@ -24,7 +24,9 @@ typedef enum
 	READ_DIGITAL_INPUTS=3,
 	READ_ADC=4,
 	ACK=5,
-	SET_PWM=6
+	SET_PWM=6,
+	CONFIG_SPI=7,
+	SEND_SPI=8
 }AT_COMMANDS;
 
 #define DEBUG()	_delay_cycles(1)

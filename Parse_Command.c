@@ -20,6 +20,8 @@ const char * AT_PORT_1 =",PORT1";
 const char * AT_PORT_2 =",PORT2";
 const char * AT_PORT_3 =",PORT3";
 const char * AT_PWM ="PWM";
+const char * AT_SPI_CONFIG = "SPI_CONFIG";
+const char * AT_SPI_SEND = "SPI_SEND";
 const char * AT_INVALID = "\r\nInvalid Message\r\n";
 
 //Checks for the string "AT+" and returns the pointer to the location past this if it is included in the string
@@ -87,7 +89,20 @@ char * Get_AT_Command(char * Input_String,AT_COMMANDS *AT_COMMAND)
 		returnVal+=strlen(AT_PWM);
 		return returnVal;
 	}
-
+	returnVal = strstr((const char *)Input_String,AT_SPI_CONFIG);
+	if(returnVal)
+	{
+		*AT_COMMAND =CONFIG_SPI;
+		returnVal+=strlen(AT_SPI_CONFIG);
+		return returnVal;
+	}
+	returnVal = strstr((const char *)Input_String,AT_SPI_SEND);
+	if(returnVal)
+	{
+		*AT_COMMAND = SEND_SPI;
+		returnVal+=strlen(AT_SPI_SEND);
+		return returnVal;
+	}
 	return returnVal;
 }
 

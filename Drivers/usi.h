@@ -40,6 +40,14 @@ typedef enum
 	MODULE_B
 }MODULES;
 
+typedef enum
+{
+	Data_Changed_First_Edge_Inactive_Low=0,
+	Data_Changed_First_Edge_Inactive_High=1,
+	Data_Captured_First_Edge_Inactive_Low=2,
+	Data_Captured_First_Edge_Inactive_High=3
+}SPI_PHASE_POLARITYS;
+
 typedef struct
 {
 	SERIAL_TYPES serialType;
@@ -55,7 +63,7 @@ uint8_t getReceivedLength();
 void clearRXHead();
 uint8_t writeReadByte(uint8_t data);
 void writeUartString(char * data);
-
+void initSpiBFull(uint16_t baudRate, SPI_PHASE_POLARITYS SPI_Phase_Polarity);
 
 extern char rx0Buf[UART_BUFFER_LEN];
 bool blockOnOk();

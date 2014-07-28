@@ -14,6 +14,7 @@
 #include "Command_Lib/Define_GPIO.h"
 #include "Command_Lib/Get_ADC.h"
 #include "Command_Lib/Set_PWM.h"
+#include "Command_Lib/Serial_Data.h"
 
 
 char Command_Buffer[40];
@@ -79,6 +80,18 @@ void Run_Command(char * Input_Text)
  				break;
  			case SET_PWM:
  				if(Set_PWM_Output(Input_Text))
+ 				{
+ 					returnVal = true;
+ 				}
+ 				break;
+ 			case CONFIG_SPI:
+ 				if(Define_Spi(Input_Text))
+ 				{
+ 					returnVal = true;
+ 				}
+ 				break;
+ 			case SEND_SPI:
+ 				if(Send_SPI_Data(Input_Text))
  				{
  					returnVal = true;
  				}
