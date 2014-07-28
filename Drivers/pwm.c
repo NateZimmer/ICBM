@@ -30,32 +30,46 @@ void channelPwmSetup(PWM_PINS PWM_PIN,uint16_t timerValue)
 	{
 	case P1x2_TA0x1:
 		P1DIR |= BIT2;
+		P1OUT |= BIT2;
 		P1SEL |= BIT2;
+		P1SEL2 &=~BIT2;
 		break;
+
 	case P1x6_TA0x1:
 		P1DIR |= BIT6;
+		P1OUT |= BIT6;
 		P1SEL |= BIT6;
+		P1SEL2 &=~BIT6;
 		break;
 
 	case P2x1_TA1x1:
 		P2DIR |= BIT1;
+		P2OUT |= BIT1;
 		P2SEL |= BIT1;
+		P2SEL2 &= ~BIT1;
 		break;
 
 	case P2x2_TA1x1:
 		P2DIR |= BIT2;
+		P2OUT |= BIT2;
 		P2SEL |= BIT2;
+		P2SEL2 &= ~BIT2;
 		break;
 
 	case P2x4_TA1x2:
 		P2DIR |= BIT4;
+		P2OUT |= BIT4;
 		P2SEL |= BIT4;
+		P2SEL2 &= ~BIT4;
 		break;
 
 	case P2x5_TA1x2:
 		P2DIR |= BIT5;
+		P2OUT |= BIT5;
 		P2SEL |= BIT5;
+		P2SEL &= ~BIT5;
 		break;
+
 	}
 
 	if(PWM_PIN & (P1x2_TA0x1|P1x6_TA0x1))
