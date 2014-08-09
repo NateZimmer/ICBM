@@ -17,6 +17,7 @@ typedef enum
 }clockFreqs;
 
 void setupCoreClock(clockFreqs coreFrequency);
+void calibrateDCO(clockFreqs coreFrequency);
 void disableWDT();
 
 

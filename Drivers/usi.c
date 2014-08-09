@@ -72,7 +72,7 @@ void initSpiBFull(uint16_t baudRate, SPI_PHASE_POLARITYS SPI_Phase_Polarity)
 	P1SEL2 |= BIT5 + BIT6 + BIT7;
 	P1DIR |= BIT5 + BIT6 + BIT7;
 	UCB0CTL1 |= UCSWRST;
-	UCB0CTL0 |= (((uint16_t)SPI_Phase_Polarity)<<6) + UCMSB + UCMST+ UCSYNC;
+	UCB0CTL0 = (((uint16_t)SPI_Phase_Polarity)<<6) + UCMSB + UCMST+ UCSYNC;
 	UCB0CTL1 |= UCSSEL_2; // SMCLK
 	UCB0BR1 = ((baudRate)&0xFF00)>>8;
 	UCB0BR0 = (baudRate)&0xFF;

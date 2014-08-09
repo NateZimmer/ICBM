@@ -27,13 +27,18 @@
 
 SERIAL_CLASSES uartType = {UART,BAUD_9600,MODULE_A};
 
+#define EXTERNAL_CRYSTAL_SOLDERED
+
 void main(void) {
 	P1DIR = 0;
 	P1OUT = 0;
-	P2SEL = 0;
-	P2SEL2 = 0;
 	setupCoreClock(CLK_16_MHZ);
 	disableWDT();
+
+#ifdef EXTERNAL_CRYSTAL_SOLDERED
+	calibrateDCO(CLK_16_MHZ);
+#endif
+
 	initADC(0); // exploit erata to make this work
 	initUSI(&uartType);
 	_enable_interrupts();
