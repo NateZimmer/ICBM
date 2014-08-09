@@ -27,7 +27,7 @@
 
 SERIAL_CLASSES uartType = {UART,BAUD_9600,MODULE_A};
 
-#define EXTERNAL_CRYSTAL_SOLDERED
+//#define EXTERNAL_CRYSTAL_SOLDERED
 
 void main(void) {
 	P1DIR = 0;
